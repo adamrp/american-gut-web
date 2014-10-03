@@ -81,7 +81,8 @@ for i, gkey in enumerate(group_order):
 qidx_to_qid = {}
 
 # enumeration here is to keep track of display order -- the serial starts at 1
-for i, (idx, question_text) in enumerate(question_map.items(), start=1):
+for i, (idx, question_text) in enumerate(sorted(question_map.items()),
+                                         start=1):
     qidx_to_qid[idx] = i
     lines['survey_question'].append((question_text, question_text))
 
@@ -92,7 +93,7 @@ supp_qkey_to_qid = {}
 supp = {qkey: question_text
         for qkey, question_text in _HUMAN_SURVEY.items()
         if qkey.startswith('SUPPLEMENTAL_')}
-for i2, (qkey, question_text) in enumerate(supp.items(), start = i):
+for i2, (qkey, question_text) in enumerate(sorted(supp.items()), start = i)):
     supp_qkey_to_qid[qkey] = i2
     lines['survey_question'].append((question_text, question_text))
 
@@ -103,7 +104,8 @@ personal = {qkey: question_text
             if qkey.startswith('PERSONAL_PROMPT_')
             and not qkey.endswith('_TITLE')}
 personal_qkey_to_qid = {}
-for i3, (qkey, question_text) in enumerate(personal.items(), start = i2):
+for i3, (qkey, question_text) in enumerate(sorted(personal.items()),
+                                           start = i2)):
     personal_qkey_to_qid[qkey] = i3
     lines['survey_question'].append((question_text, question_text))
 
